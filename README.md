@@ -400,11 +400,216 @@ Apifox-windows-latest.zip
 
 wechat_devtools_1.06.2504292_win32_x64.exe
 
+#### 2.1.Vue
+
+##### 2.1.1.安装node.js
+
+打开node.jd官网[Node.js 中文网](https://dev.nodejs.cn/)
+
+打开安装包直接next就行
+
+不要勾选Automatically install
 
 
 
+安装完成后，检查一下是否安装成功
+
+Windows＋R 输入cmd打开命令行，输入一下命令
+
+```
+C:\Users\Administrator>node -v
+v22.15.0
 
 
+```
+
+输出版本号就说明安装成功
+
+
+
+##### 2.1.2.创建全局安装和缓存日志
+
+在我们的安装目录下，创建名为node_cache和node_global的两个文件夹。
+
+打开管理员命令窗口（一定要是管理员），执行如下命令，将npm的全局模块目录和缓存目录配置到我们刚才创建的那两个目录。
+
+```
+npm config set prefix "D:\SoftWares\nodejs\node_global"
+ 
+npm config set cache  "D:\SoftWares\nodejs\node_cache"
+```
+
+
+
+##### 2.1.3.配置环境变量
+
+```
+环境变量怎么变成一行而不是列表了？
+
+
+变成这个样子一般都是由于你这个 %SystemRoot%\system32  位置被调整在了不是第一个，
+
+所以解决很简单，只需要找到   %SystemRoot%\system32   并提到第一位
+
+一定要注意，不要多截取了，到 分号 为止
+```
+
+
+
+在设置中搜索并打开环境变量Path
+
+将用户变量最后一行**C:\Users\你的用户名\AppData\Roaming\npm**  
+
+修改为 你的安装目录D:\SoftWares\nodejs\node_global
+
+
+
+系统变量中新增一个变量，如下👇
+
+变量名：NODE_PATH
+
+变量值：D:\SoftWares\nodejs\node_modules
+
+
+
+系统变量中的path增加下面二个
+
+%NODE_PATH%\node_modules
+
+%NODE_PATH%\node_global
+
+
+
+##### 2.1.4.打开权限控制
+
+右击node.js文件夹点击属性，选中安全-编辑
+
+注意，那四个组或用户名都看一下把权限都打开
+
+完全控制--读取
+
+##### 2.1.5.配置淘宝镜像
+
+
+
+管理员身份运行cmd,安装淘宝镜像cnpm
+
+淘宝npm镜像原地址 `https://registry.npm.taobao.org` 在2022年6月30日后已不再可用，因此应使用新地址 `https://registry.npmmirror.com/`
+
+```
+npm config set registry https://registry.npmmirror.com/
+
+查看cnpm配置修改是否成功
+
+
+npm config list
+
+npm -v
+
+cache = "D:\\SoftWares\\nodejs\\node_cache"
+prefix = "D:\\SoftWares\\nodejs\\node_global"
+registry = "https://registry.npmmirror.com/"
+
+; node bin location = D:\SoftWares\nodejs\node.exe
+; node version = v22.15.0
+; npm local prefix = C:\Users\Administrator
+; npm version = 10.9.2
+; cwd = C:\Users\Administrator
+; HOME = C:\Users\Administrator
+; Run `npm config ls -l` to show all defaults.
+
+```
+
+
+
+##### 2.1.6.安装Vue CLI脚手架
+
+安装Vue cli
+
+```
+npm install -g @vue/cli
+```
+
+检查Vue cli是否安装好，出现版本号则安装成功
+
+```
+vue --version 
+
+@vue/cli 5.0.8
+```
+
+
+
+##### 2.1.7.创建并运行Vue项目
+
+创建一个hello-world项目
+
+```
+vue create hello-world
+
+$ cd hello-world-vue2
+$ npm run serve
+```
+
+
+
+用VS Code打开项目
+
+第一次运行
+
+Ctrl＋Shift＋`调出终端，输入
+
+```
+npm run serve
+```
+
+后面就可以直接运行npm脚本
+
+调出npm脚本
+
+在范围内右键 打开npm脚本
+
+点击运行
+
+打开网站链接
+
+
+
+执行成功界面
+
+```
+ DONE  Compiled successfully in 2317ms                                                                          17:25:42
+
+
+  App running at:
+  - Local:   http://localhost:8080/
+  - Network: http://192.168.29.5:8080/
+
+  Note that the development build is not optimized.
+  To create a production build, run npm run build.
+```
+
+
+
+##### 2.1.8.vuex，vue-router的配置
+
+```
+// 仓库管理vuex
+ 
+npm install vuex@3
+ 
+// 路由
+ 
+npm install vue-router@3
+ 
+// 请求和响应
+ 
+npm install axios
+```
+
+
+
+#### 2.2.微信开发工具
 
 
 
