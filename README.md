@@ -1214,7 +1214,7 @@ D:\SoftWares\Git\usr\bin\ssh.exe
 
 
 
-##### 1. 确认 Git 安装
+1. 确认 Git 安装
 
 ```
 C:\Users\Administrator>git --version
@@ -1223,25 +1223,25 @@ git version 2.49.0.windows.1
 
 
 
-##### 2. 安装或修复 SSH
+2. 安装或修复 SSH
 
 如果 Git 已安装但 `ssh` 命令不可用，你可以尝试以下方法：
 
-##### 方法一：重新安装 Git
+方法一：重新安装 Git
 
 1. 卸载当前的 Git。
 2. 访问 [Git 官网](https://git-scm.com/)下载最新版本的安装程序。
 3. 在安装过程中，确保选择了“Use OpenSSH”选项（这通常在“Choosing Components”或“Select Components”步骤中）。
 4. 完成安装。
 
-##### 方法二：单独安装 OpenSSH
+方法二：单独安装 OpenSSH
 
 如果你不想重新安装 Git，可以单独安装 OpenSSH：
 
 1. 访问 [OpenSSH for Windows](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse) 的官方文档。
 2. 按照文档中的指导安装 OpenSSH。
 
-##### 方法三：检查环境变量
+方法三：检查环境变量
 
 确保 `C:\Program Files\Git\usr\bin\` 目录已经添加到你的系统环境变量中。你可以通过以下步骤检查和添加环境变量：
 
@@ -1251,9 +1251,9 @@ git version 2.49.0.windows.1
 4. 确保 `C:\Program Files\Git\usr\bin\` 已经列在列表中。如果没有，点击“新建”并添加该路径。D:\SoftWares\Git\usr\bin
 5. 点击确定保存更改。
 
-### 3. 测试 SSH
+3. 测试 SSH
 
-##### 重新打开命令行窗口，尝试运行以下命令来测试 SSH 是否可以正常工作：
+重新打开命令行窗口，尝试运行以下命令来测试 SSH 是否可以正常工作：
 
 ```bash
 ssh -V
@@ -1268,6 +1268,28 @@ ssh -V
 
 
 应用确定一下就可以了，后面就可以使用ssh方式从gitee仓库克隆拉取代码
+
+
+
+#### 4.8.Git克隆文件不显示绿色勾、红色感叹号等图标
+
+Git和TorToise[Git安装](https://so.csdn.net/so/search?q=Git安装&spm=1001.2101.3001.7020)后，Git克隆的文件不会显示绿色勾、红色感叹号等图标。
+
+1、打开注册表
+
+(1)Win+R打开运行窗口，输入[regedit](https://so.csdn.net/so/search?q=regedit&spm=1001.2101.3001.7020)，点击确定，打开注册表编辑器。
+
+(2)找到路径 **计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers\**
+
+(3)该项下有很多个注册表，**Windows Explorer Shell** 支持的 Overlay Icon 最多 15 个，最后面的几个项目是通过手动注册脚本加入的，前面的安装TortoiseGit时加入的。
+
+2、删除用不到注册表
+
+(1)删除不用的oneDrive等项目。
+
+(2)删除最后几个重复的，然后重启资源管理器(在任务管理器中重启)。
+
+(3)经过以上步骤后，我的电脑[git克隆](https://so.csdn.net/so/search?q=git克隆&spm=1001.2101.3001.7020)文件正常显示图标。
 
 
 
