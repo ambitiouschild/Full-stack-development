@@ -156,6 +156,25 @@ node-v22.15.0-x64.msi
 
 
 
+##### 1.2.1**可以在Windows系统上安装多个版本的Node.js**‌。
+
+具体可以通过使用[nvm-windows](https://www.baidu.com/s?rsv_dl=re_dqa_generate&sa=re_dqa_generate&wd=nvm-windows&rsv_pq=9bb49a6f001be0fd&oq=可以安装两个版本的node吗&rsv_t=83f4NgHsF9WbZw4CB2ACzBYJXDbATpD3yiUQg0U1I6cgSbk42n4X0NDhMmoV2A99KVhL&tn=baiduhome_pg&ie=utf-8)（Node Version Manager for Windows）工具来实现。以下是详细步骤：
+
+1. ‌**下载nvm-setup.zip**‌：访问nvm-windows的GitHub发布页面，下载最新版本的nvm-setup.zip文件‌1。
+
+2. ‌**安装nvm**‌：双击下载的zip文件中的安装程序，按照安装向导的提示进行安装。安装完成后，可能需要重启命令提示符窗口（CMD）或PowerShell以便让nvm命令生效‌1。
+
+3. ‌使用nvm安装Node.js版本
+
+   - 安装第一个Node.js版本：打开命令提示符或PowerShell，输入命令安装第一个版本，例如安装14.x版本：`nvm install 14` 或安装特定版本，如14.17.0：`nvm install 14.17.0`‌1。
+   - 安装第二个Node.js版本：同样在命令行中，安装第二个版本，例如安装最新版的Node.js：`nvm install latest` 或安装另一个具体版本，如18.17.0：`nvm install 18.17.0`‌1。
+   
+4. ‌**切换Node.js版本**‌：使用命令切换到已安装的某个版本，例如切换到16.17.0版本：`nvm use 16.17.0` 或切换到18.17.0版本：`nvm use 18.17.0`‌1。
+
+5. ‌**验证安装**‌：每次切换版本后，可以通过运行命令来验证当前使用的Node.js版本：`node -v` 和 `npm -v`‌1。
+
+通过nvm，可以轻松地在多个Node.js版本之间切换，无需担心版本冲突的问题‌
+
 #### 1.3.Maven
 
 
