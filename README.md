@@ -156,6 +156,25 @@ node-v22.15.0-x64.msi
 
 
 
+##### 1.2.1**可以在Windows系统上安装多个版本的Node.js**‌。
+
+具体可以通过使用[nvm-windows](https://www.baidu.com/s?rsv_dl=re_dqa_generate&sa=re_dqa_generate&wd=nvm-windows&rsv_pq=9bb49a6f001be0fd&oq=可以安装两个版本的node吗&rsv_t=83f4NgHsF9WbZw4CB2ACzBYJXDbATpD3yiUQg0U1I6cgSbk42n4X0NDhMmoV2A99KVhL&tn=baiduhome_pg&ie=utf-8)（Node Version Manager for Windows）工具来实现。以下是详细步骤：
+
+1. ‌**下载nvm-setup.zip**‌：访问nvm-windows的GitHub发布页面，下载最新版本的nvm-setup.zip文件‌1。
+
+2. ‌**安装nvm**‌：双击下载的zip文件中的安装程序，按照安装向导的提示进行安装。安装完成后，可能需要重启命令提示符窗口（CMD）或PowerShell以便让nvm命令生效‌1。
+
+3. ‌使用nvm安装Node.js版本
+
+   - 安装第一个Node.js版本：打开命令提示符或PowerShell，输入命令安装第一个版本，例如安装14.x版本：`nvm install 14` 或安装特定版本，如14.17.0：`nvm install 14.17.0`‌1。
+   - 安装第二个Node.js版本：同样在命令行中，安装第二个版本，例如安装最新版的Node.js：`nvm install latest` 或安装另一个具体版本，如18.17.0：`nvm install 18.17.0`‌1。
+   
+4. ‌**切换Node.js版本**‌：使用命令切换到已安装的某个版本，例如切换到16.17.0版本：`nvm use 16.17.0` 或切换到18.17.0版本：`nvm use 18.17.0`‌1。
+
+5. ‌**验证安装**‌：每次切换版本后，可以通过运行命令来验证当前使用的Node.js版本：`node -v` 和 `npm -v`‌1。
+
+通过nvm，可以轻松地在多个Node.js版本之间切换，无需担心版本冲突的问题‌
+
 #### 1.3.Maven
 
 
@@ -1214,7 +1233,7 @@ D:\SoftWares\Git\usr\bin\ssh.exe
 
 
 
-##### 1. 确认 Git 安装
+1. 确认 Git 安装
 
 ```
 C:\Users\Administrator>git --version
@@ -1223,25 +1242,25 @@ git version 2.49.0.windows.1
 
 
 
-##### 2. 安装或修复 SSH
+2. 安装或修复 SSH
 
 如果 Git 已安装但 `ssh` 命令不可用，你可以尝试以下方法：
 
-##### 方法一：重新安装 Git
+方法一：重新安装 Git
 
 1. 卸载当前的 Git。
 2. 访问 [Git 官网](https://git-scm.com/)下载最新版本的安装程序。
 3. 在安装过程中，确保选择了“Use OpenSSH”选项（这通常在“Choosing Components”或“Select Components”步骤中）。
 4. 完成安装。
 
-##### 方法二：单独安装 OpenSSH
+方法二：单独安装 OpenSSH
 
 如果你不想重新安装 Git，可以单独安装 OpenSSH：
 
 1. 访问 [OpenSSH for Windows](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse) 的官方文档。
 2. 按照文档中的指导安装 OpenSSH。
 
-##### 方法三：检查环境变量
+方法三：检查环境变量
 
 确保 `C:\Program Files\Git\usr\bin\` 目录已经添加到你的系统环境变量中。你可以通过以下步骤检查和添加环境变量：
 
@@ -1251,9 +1270,9 @@ git version 2.49.0.windows.1
 4. 确保 `C:\Program Files\Git\usr\bin\` 已经列在列表中。如果没有，点击“新建”并添加该路径。D:\SoftWares\Git\usr\bin
 5. 点击确定保存更改。
 
-### 3. 测试 SSH
+3. 测试 SSH
 
-##### 重新打开命令行窗口，尝试运行以下命令来测试 SSH 是否可以正常工作：
+重新打开命令行窗口，尝试运行以下命令来测试 SSH 是否可以正常工作：
 
 ```bash
 ssh -V
@@ -1268,6 +1287,28 @@ ssh -V
 
 
 应用确定一下就可以了，后面就可以使用ssh方式从gitee仓库克隆拉取代码
+
+
+
+#### 4.8.Git克隆文件不显示绿色勾、红色感叹号等图标
+
+Git和TorToise[Git安装](https://so.csdn.net/so/search?q=Git安装&spm=1001.2101.3001.7020)后，Git克隆的文件不会显示绿色勾、红色感叹号等图标。
+
+1、打开注册表
+
+(1)Win+R打开运行窗口，输入[regedit](https://so.csdn.net/so/search?q=regedit&spm=1001.2101.3001.7020)，点击确定，打开注册表编辑器。
+
+(2)找到路径 **计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers\**
+
+(3)该项下有很多个注册表，**Windows Explorer Shell** 支持的 Overlay Icon 最多 15 个，最后面的几个项目是通过手动注册脚本加入的，前面的安装TortoiseGit时加入的。
+
+2、删除用不到注册表
+
+(1)删除不用的oneDrive等项目。
+
+(2)删除最后几个重复的，然后重启资源管理器(在任务管理器中重启)。
+
+(3)经过以上步骤后，我的电脑[git克隆](https://so.csdn.net/so/search?q=git克隆&spm=1001.2101.3001.7020)文件正常显示图标。
 
 
 
