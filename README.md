@@ -164,11 +164,15 @@ node-v22.15.0-x64.msi
 
 2. ‌**安装nvm**‌：双击下载的zip文件中的安装程序，按照安装向导的提示进行安装。安装完成后，可能需要重启命令提示符窗口（CMD）或PowerShell以便让nvm命令生效‌1。
 
-3. ‌使用nvm安装Node.js版本
+3. ‌
+
+   使用nvm安装Node.js版本
+
+   ‌：
 
    - 安装第一个Node.js版本：打开命令提示符或PowerShell，输入命令安装第一个版本，例如安装14.x版本：`nvm install 14` 或安装特定版本，如14.17.0：`nvm install 14.17.0`‌1。
    - 安装第二个Node.js版本：同样在命令行中，安装第二个版本，例如安装最新版的Node.js：`nvm install latest` 或安装另一个具体版本，如18.17.0：`nvm install 18.17.0`‌1。
-   
+
 4. ‌**切换Node.js版本**‌：使用命令切换到已安装的某个版本，例如切换到16.17.0版本：`nvm use 16.17.0` 或切换到18.17.0版本：`nvm use 18.17.0`‌1。
 
 5. ‌**验证安装**‌：每次切换版本后，可以通过运行命令来验证当前使用的Node.js版本：`node -v` 和 `npm -v`‌1。
@@ -1311,6 +1315,110 @@ Git和TorToise[Git安装](https://so.csdn.net/so/search?q=Git安装&spm=1001.210
 (3)经过以上步骤后，我的电脑[git克隆](https://so.csdn.net/so/search?q=git克隆&spm=1001.2101.3001.7020)文件正常显示图标。
 
 
+
+
+
+#### 4.9.冲突错误，错误信息指出本地有三个文件的修改会被覆盖
+
+
+
+用户执行了git pull命令，但出现了错误，提示本地有修改的文件会被合并覆盖，导致合并中止。首先，我需要理解整个过程的每一步发生了什么，以及为什么会发生这个错误。
+
+首先，用户运行的是git pull --progress -v --no-rebase -- "origin"。这应该是一个拉取远程origin的更新并合并到当前分支的操作。根据输出，远程仓库在拉取时枚举和压缩了对象，成功接收了283个对象，然后开始解析差异。接下来，显示各个分支的状态，大部分都是up to date，说明这些分支在本地和远程是一致的。然后，错误信息指出本地有三个文件的修改会被覆盖，导致合并中止，Git建议提交更改或储藏它们。
+
+现在，我需要分析用户当前的状态。用户可能在本地修改了这三个Java文件，而远程仓库的master分支有新的提交（从d24207df到61864d65），这些提交可能修改了同样的文件。当执行git pull时，Git会尝试合并远程的更改到本地分支，但由于本地有未提交的更改，合并会导致冲突，因此Git中止了操作。
+
+接下来，用户有几个选择来处理这个问题：
+
+1. **提交本地更改**：如果这些修改是重要的，用户可以先提交它们，然后再执行git pull。这样，Git会创建一个新的提交，合并远程的更改，如果有冲突，用户可以在提交前解决冲突。
+2. **储藏更改**：如果用户不想立即提交这些修改，可以使用git stash来临时保存这些更改，然后执行git pull，拉取远程更改后再应用储藏的修改。这可能会产生冲突，需要手动解决。
+3. **放弃本地更改**：如果本地的修改不重要，用户可以选择放弃这些更改，使用git checkout -- 来撤销修改，或者使用git reset --hard HEAD来重置所有更改，然后再次执行git pull。
+
+现在，用户需要根据具体情况选择合适的方法。例如，如果他们正在开发中，可能需要提交或储藏更改以保留工作。如果他们只是想快速获取远程更新，并且不需要保留本地的修改，可以放弃更改。
+
+另外，用户可能需要检查为什么这些文件会被远程修改覆盖，是否是协作中的正常情况，或者是否有必要与团队成员沟通这些更改以避免冲突。
+
+总结来说，解决这个问题的步骤通常是先处理本地的未提交更改，然后再进行合并操作。根据用户的需求选择合适的处理方式，确保不会丢失工作或引入不必要的冲突。
+
+
+
+要解决此问题，您有以下几种选择：
+
+1. 提交本地更改后合并
+
+如果您想保留本地修改并将其纳入版本历史：
+
+```bash
+# 添加修改到暂存区
+git add sport-consume-service/sport-api/src/main/java/com/high/sport/service/UserInfoService.java
+git add sport-consume-service/sport-api/src/main/java/com/high/sport/service/impl/GradeEnrollUserServiceImpl.java
+git add sport-consume-service/sport-api/src/main/java/com/high/sport/service/impl/UserInfoServiceImpl.java
+
+# 提交更改
+git commit -m "保存本地修改"
+
+# 再次拉取并合并远程更改
+git pull origin master
+```
+
+2. 储藏本地修改后合并
+
+如果您暂时不想提交，但需要保留工作进度：
+
+```bash
+# 储藏当前修改
+git stash
+
+# 拉取远程更改
+git pull origin master
+
+# 恢复储藏的内容（可能需解决冲突）
+git stash pop
+```
+
+3. 放弃本地修改
+
+如果您不需要保留这些本地修改：
+
+```bash
+# 放弃指定文件的修改
+git checkout HEAD -- sport-consume-service/sport-api/src/main/java/com/high/sport/service/UserInfoService.java
+git checkout HEAD -- sport-consume-service/sport-api/src/main/java/com/high/sport/service/impl/GradeEnrollUserServiceImpl.java
+git checkout HEAD -- sport-consume-service/sport-api/src/main/java/com/high/sport/service/impl/UserInfoServiceImpl.java
+
+# 或放弃所有未提交的修改
+git reset --hard HEAD
+
+# 然后拉取更新
+git pull origin master
+```
+
+说明
+
+- **提交更改**适用于需要保留修改并整合到项目历史的情况。
+- **储藏更改**适合临时保存工作现场，适用于需要先同步远程变更再继续工作的场景。
+- **放弃修改**适用于确认本地修改不再需要，可以丢弃的情况。
+
+选择最适合您当前工作状态的方案执行即可。如果选择前两种方案，合并后可能需要手动解决文件冲突。
+
+
+
+#### 4.10TortoiseGit解决冲突
+
+冲突解决（高频场景）
+
+1. **识别冲突**
+   拉取或合并时若提示冲突，文件图标显示红色感叹号。通过右键 → `检查修改`查看冲突标记文件。
+
+2. **编辑冲突**
+   右键冲突文件 → `编辑冲突` → 使用三窗格工具（本地/远程/合并结果）调整内容 → 保存后标记为`已解决。
+
+   工具推荐：可配置Beyond Compare等第三方对比工具。
+
+3. **提交修复**
+   解决所有冲突后 → 右键仓库 → `提交` → 填写合并说明 → 推送至远程。
+
+   
 
 ### 5. 网络
 
