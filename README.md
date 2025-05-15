@@ -179,6 +179,112 @@ node-v22.15.0-x64.msi
 
 通过nvm，可以轻松地在多个Node.js版本之间切换，无需担心版本冲突的问题‌
 
+
+
+##### 1.2.2.Node.js下载安装及环境配置教程
+
+https://nodejs.org/zh-cn/download/
+
+
+
+（7）测试安装是否成功，按下【win+R】键，输入cmd，打开cmd窗口
+
+```
+node -v     // 显示node.js版本
+
+npm -v      // 显示npm版本
+```
+
+
+
+**三、环境配置**
+
+（1）找到安装的目录，在安装目录下新建两个文件夹【node_global】和【node_cache】
+
+
+
+（2）创建完毕后，使用管理员身份打开cmd命令窗口（打开方法见下方Tips），输入
+
+①npm config set prefix “你的路径\node_global” （复制你刚刚创建的“node_global”文件夹路径）
+
+②npm config set cache “你的路径\node_cache” （复制你刚刚创建的“node_cache”文件夹路径）
+
+
+
+Tips: 使用管理员身份运行cmd的方法 ：点击左下角【开始】菜单，在搜索区域输入“命令提示符”，然后点击【以管理员身份运行】
+
+
+
+（3）配置环境变量
+
+①【此电脑】-单击右键-【属性】-【高级系统设置】-【环境变量】
+
+变量名：NODE_PATH
+
+变量值：C:\Program Files\nodejs\node_global\node_modules
+
+然后你就会发现【node_global】里多出了一个【node_modules】文件夹
+
+Tips: 如果输入变量值之后没有自动创建【node_modules】文件夹，就在【node_global】下手动创建一个【node_modules】文件夹，再复制你创建的【node_modules】文件夹的路径地址到变量值
+
+③编辑【用户变量】中的【Path】
+
+
+
+
+
+④将默认的 C 盘下【 `AppData\Roaming\npm` 】修改成 【`node_global】的路径`，点击确定
+
+
+
+
+
+⑤在【系统变量】中选择【Path】点击【编辑】添加【NODE_PATH】，随后一直点击【确定】
+
+
+
+Tips：如果出现安装失败的话可能是你没有使用管理员身份运行cmd窗口，或者可以修改一下【node_global】和【node_cache]的权限
+
+步骤： 鼠标右击【node_global】的文件夹，点击【属性】，再点击【安全】，再点击【编辑】，将权限都勾上，随即点击【确定】即可，【node_cache】步骤同理。
+
+
+
+**五、安装淘宝镜像**
+
+①安装淘宝镜像
+
+
+
+```
+npm config set registry https://registry.npm.taobao.org
+```
+
+
+
+查看是否成功：
+
+```
+npm config get registry
+```
+
+
+
+②安装cnpm（按需安装）
+
+说明： npm是node官方的包管理器。cnpm是个中国版的npm，是淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm。
+
+
+
+```
+npm install -g cnpm --registry=https://registry.npmmirror.com
+```
+
+查看是否安装成功
+
+命令： cnpm -v
+
+
+
 #### 1.3.Maven
 
 
